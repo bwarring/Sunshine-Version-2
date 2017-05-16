@@ -77,52 +77,20 @@ public class MainActivity extends AppCompatActivity {
 //                et.setTypeface(Typeface.SERIF);
 //            }
             // </code>
+
             String[] days = new String[]{"Today", "Tomorrow", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday"};
             String[] weather = new String[]{"Sunny", "Sunny", "Rainy", "Rainy", "Cloudy", "Cloudy", "Sunny", "Sunny", "Sunny"};
-            //List<String> itemList = new ArrayList<String>();
+
             List<Forecast> forecastList = new ArrayList<>();
             int cnt = 9;
-            //StringBuffer sb = new StringBuffer();
             Forecast forecast = null;
             for (int i=0; i<cnt; i++) {
-//                sb.append(days[i]);
-//                sb.append(" - ");
-//                sb.append(weather[i]);
-//                sb.append(" - ");
-//                sb.append(RandomUtility.random(75, 85));
-//                sb.append("/");
-//                sb.append(RandomUtility.random(60, 70));
-//                itemList.add(sb.toString());
-//                sb.setLength(0);
-
                 forecastList.add(new Forecast(days[i], weather[i], RandomUtility.random(75, 85), RandomUtility.random(60, 70)));
             }
 
-            //ListView lv = (ListView)rootView.findViewById(R.id.list_view_forecast);
-            // Convert ArrayList to array
-//            String[] lv_arr = new String[itemList.size()];
-//            Forecast[] lv_forecast_arr = new Forecast[itemList.size()];
-//            int i = 0;
-//            for (String item : itemList){
-//                lv_arr[i] = item;
-//                i++;
-//            }
-            /*
-            lv.setAdapter(new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_list_item_1, lv_arr));
-
-            ArrayAdapter<String> itemsAdapter =
-                    new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_list_item_1, lv_arr);
-            ListView listView = (ListView) rootView.findViewById(R.id.list_view_forecast);
-            listView.setAdapter(itemsAdapter);
-            */
-
             // custom array adapter method
-            // Construct the data source
-            ArrayList<Forecast> arrayOfUsers = new ArrayList<>();
-            // Create the adapter to convert the array to views
-            //ForecastListArrayAdapter adapter = new ForecastListArrayAdapter(this.getContext(), forecastList);
             ForecastListArrayAdapter adapter = new ForecastListArrayAdapter(this.getContext(), Forecast.list());
-            // Attach the adapter to a ListView
+            // attach the adapter to forecast ListView
             ListView listView = (ListView) rootView.findViewById(R.id.list_view_forecast);
             listView.setAdapter(adapter);
 
