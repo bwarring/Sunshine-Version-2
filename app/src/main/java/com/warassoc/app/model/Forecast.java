@@ -1,11 +1,14 @@
 package com.warassoc.app.model;
 
-import com.warassoc.app.model.util.RandomUtility;
+import com.warassoc.app.util.RandomUtility;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Copyright 2017 Warring Associates LLC
+ * PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * <p>
  * Created by bwarr on 5/15/2017.
  */
 
@@ -14,6 +17,7 @@ public class Forecast {
     private String weather;
     private int high;
     private int low;
+    private String jsonStr;
 
     public Forecast(){
         super();
@@ -25,6 +29,11 @@ public class Forecast {
         this.weather=weather;
         this.high=high;
         this.low=low;
+    }
+
+    public Forecast(String jsonStr) {
+        super();
+        this.jsonStr = jsonStr;
     }
 
     public static List<Forecast> list(){
@@ -74,5 +83,13 @@ public class Forecast {
 
     public void setLow(int low) {
         this.low = low;
+    }
+
+    public String getJsonStr() {
+        return jsonStr;
+    }
+
+    public void setJsonStr(String jsonStr) {
+        this.jsonStr = jsonStr;
     }
 }

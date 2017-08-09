@@ -1,7 +1,14 @@
-package com.warrassoc.app.service;
+package com.warassoc.app.service;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.ListView;
+
+import com.example.android.sunshine.app.R;
+import com.warassoc.app.adapter.WeatherDetailListArrayAdapter;
+import com.warassoc.app.model.OpenWeatherResponse;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,14 +28,18 @@ import javax.inject.Inject;
 public class OpenWeatherServiceImpl extends AsyncTask<Object, Object, String> implements OpenWeatherService {
 
     private String forecastJsonStr;
+    private Context context;
+    private View rootView;
 
     public OpenWeatherServiceImpl() {
         super();
     }
 
     @Inject
-    public OpenWeatherServiceImpl(OpenWeatherServiceRequest request) {
+    public OpenWeatherServiceImpl(Context context, View rootView, OpenWeatherServiceRequest request) {
         super();
+        this.context = context;
+        this.rootView = rootView;
     }
 
     @Override
@@ -46,7 +57,10 @@ public class OpenWeatherServiceImpl extends AsyncTask<Object, Object, String> im
             // http://openweathermap.com/API#forcast
 
             //APPID ="2be6bb1f8190f9079a8d5270be7417c0";
-            URL url = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?q=66061&mode=json&units=metric&cnt=7&APPID=2be6bb1f8190f9079a8d5270be7417c0");
+            // units: imperial <-- fahrenheit
+            // units: metric <-- celsius
+
+            URL url = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?q=66061&mode=json&units=imperial&cnt=7&APPID=2be6bb1f8190f9079a8d5270be7417c0");
 
             // Create the request to OpenWeatherMap, and open the connection
             urlConnection = (HttpURLConnection) url.openConnection();
@@ -104,7 +118,15 @@ public class OpenWeatherServiceImpl extends AsyncTask<Object, Object, String> im
     @Override
     protected void onPostExecute(String forecastJsonStr) {
         //((TextView) findViewById(R.id.textView2)).setText("");
-        System.out.println(forecastJsonStr);
+        JacksonService jacksonService = new JacksonServiceImpl();
+        OpenWeatherResponse openWeatherResponse = jacksonService.toObject(forecastJsonStr, OpenWeatherResponse.class);
+
+        // custom array adapter method
+        WeatherDetailListArrayAdapter adapter = new WeatherDetailListArrayAdapter(context, openWeatherResponse.getList());
+        // attach the adapter to forecast ListView
+        ListView listView = (ListView) rootView.findViewById(R.id.list_view_forecast);
+        listView.setAdapter(adapter);
+        //System.out.println(forecastJsonStr);
     }
 
     @Override

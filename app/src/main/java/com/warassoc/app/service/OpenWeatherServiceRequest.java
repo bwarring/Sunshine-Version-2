@@ -1,4 +1,4 @@
-package com.warrassoc.app.service;
+package com.warassoc.app.service;
 
 import javax.inject.Inject;
 

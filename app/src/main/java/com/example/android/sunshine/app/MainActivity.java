@@ -9,14 +9,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import com.warassoc.app.adapter.ForecastListArrayAdapter;
 import com.warassoc.app.model.Forecast;
-import com.warassoc.app.model.util.RandomUtility;
-import com.warrassoc.app.service.OpenWeatherServiceImpl;
-import com.warrassoc.app.service.OpenWeatherServiceRequest;
+import com.warassoc.app.service.OpenWeatherServiceImpl;
+import com.warassoc.app.service.OpenWeatherServiceRequest;
+import com.warassoc.app.util.RandomUtility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,15 +21,10 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView text;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //text = (TextView) findViewById(R.id.textView2);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -96,10 +88,10 @@ public class MainActivity extends AppCompatActivity {
             }
 
             // custom array adapter method
-            ForecastListArrayAdapter adapter = new ForecastListArrayAdapter(this.getContext(), Forecast.list());
+            //ForecastListArrayAdapter adapter = new ForecastListArrayAdapter(this.getContext(), Forecast.list());
             // attach the adapter to forecast ListView
-            ListView listView = (ListView) rootView.findViewById(R.id.list_view_forecast);
-            listView.setAdapter(adapter);
+            //ListView listView = (ListView) rootView.findViewById(R.id.list_view_forecast);
+            //listView.setAdapter(adapter);
 
             // these two need to be declared outside the try/catch block
             // so they can be closed in the finally block
@@ -107,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
             //BufferedReader reader = null;
 
             // Will contain the raw JSON response as a string.
-            String forecastJsonStr = null;
+            //String forecastJsonStr = null;
             try {
                 // Construct URL for the OpenWeatherMap query
                 // Possible parameters are available at OWM's forecast API page at
@@ -129,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 request.setMode("json");
                 request.setUnits("metric");
                 request.setCount("7");
-                OpenWeatherServiceImpl openWeatherService = new OpenWeatherServiceImpl(request);
+                OpenWeatherServiceImpl openWeatherService = new OpenWeatherServiceImpl(this.getContext(), rootView, request);
                 openWeatherService.execute();
 
             } catch (Exception e) {

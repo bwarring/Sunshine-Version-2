@@ -1,4 +1,4 @@
-package com.warrassoc.app.service;
+package com.warassoc.app.service;
 
 /**
  * Copyright 2017 Warring Associates LLC

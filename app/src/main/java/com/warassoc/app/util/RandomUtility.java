@@ -1,4 +1,4 @@
-package com.warassoc.app.model.util;
+package com.warassoc.app.util;
 
 /**
  * Created by bwarr on 5/15/2017.
