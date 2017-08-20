@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.android.sunshine.app.R;
+import com.example.android.sunshine.activity.R;
 import com.warassoc.app.model.WeatherDetail;
 import com.warassoc.app.util.DateUtility;
 

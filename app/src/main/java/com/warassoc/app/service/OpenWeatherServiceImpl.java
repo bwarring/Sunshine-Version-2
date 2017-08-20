@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
-import com.example.android.sunshine.app.R;
+import com.example.android.sunshine.activity.R;
 import com.warassoc.app.adapter.WeatherDetailListArrayAdapter;
 import com.warassoc.app.model.OpenWeatherResponse;
 
@@ -25,8 +25,9 @@ import javax.inject.Inject;
  * <p>
  * Created by bwarr on 8/8/2017.
  */
-public class OpenWeatherServiceImpl extends AsyncTask<Object, Object, String> implements OpenWeatherService {
+public class OpenWeatherServiceImpl extends AsyncTask<Void, Void, String> implements OpenWeatherService {
 
+    OpenWeatherServiceRequest request;
     private String forecastJsonStr;
     private Context context;
     private View rootView;
@@ -38,17 +39,19 @@ public class OpenWeatherServiceImpl extends AsyncTask<Object, Object, String> im
     @Inject
     public OpenWeatherServiceImpl(Context context, View rootView, OpenWeatherServiceRequest request) {
         super();
+        this.request = request;
         this.context = context;
         this.rootView = rootView;
     }
 
     @Override
-    protected String doInBackground(Object... params) {
+    protected String doInBackground(Void... voids) {
 
         // these two need to be declared outside the try/catch block
         // so they can be closed in the finally block
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
+
         // Will contain the raw JSON response as a string.
         //String forecastJsonStr = null;
         try {
@@ -59,8 +62,15 @@ public class OpenWeatherServiceImpl extends AsyncTask<Object, Object, String> im
             //APPID ="2be6bb1f8190f9079a8d5270be7417c0";
             // units: imperial <-- fahrenheit
             // units: metric <-- celsius
+            StringBuilder sb = new StringBuilder();
+            sb.append("http://api.openweathermap.org/data/2.5/forecast/daily?q=");
+            sb.append(request.getLocationZip());
+            sb.append("&mode=json&units=imperial&cnt=");
+            sb.append(request.getCount());
+            sb.append("&APPID=2be6bb1f8190f9079a8d5270be7417c0");
+            URL url = new URL(sb.toString());
 
-            URL url = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?q=66061&mode=json&units=imperial&cnt=7&APPID=2be6bb1f8190f9079a8d5270be7417c0");
+            //URL url = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?q=66061&mode=json&units=imperial&cnt=7&APPID=2be6bb1f8190f9079a8d5270be7417c0");
 
             // Create the request to OpenWeatherMap, and open the connection
             urlConnection = (HttpURLConnection) url.openConnection();
@@ -125,6 +135,7 @@ public class OpenWeatherServiceImpl extends AsyncTask<Object, Object, String> im
         WeatherDetailListArrayAdapter adapter = new WeatherDetailListArrayAdapter(context, openWeatherResponse.getList());
         // attach the adapter to forecast ListView
         ListView listView = (ListView) rootView.findViewById(R.id.list_view_forecast);
+        listView.setVisibility(ListView.VISIBLE);
         listView.setAdapter(adapter);
         //System.out.println(forecastJsonStr);
     }

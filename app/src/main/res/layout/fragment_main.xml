@@ -1,33 +1,70 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity$PlaceholderFragment">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.warassoc.app.activity.MainActivity$PlaceholderFragment"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
 
     <!--<TextView android:text="@string/hello_world" android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/textView" />-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:id="@+id/textView" />-->
 
     <!--<EditText-->
-        <!--android:id="@+id/dateNow"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="21dp"-->
-        <!--android:ems="10"-->
-        <!--android:inputType="date"-->
-        <!--android:textSize="10sp"-->
-        <!--android:layout_below="@+id/textView"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_alignParentStart="true" />-->
+    <!--android:id="@+id/dateNow"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="21dp"-->
+    <!--android:ems="10"-->
+    <!--android:inputType="date"-->
+    <!--android:textSize="10sp"-->
+    <!--android:layout_below="@+id/textView"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_alignParentStart="true" />-->
+
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/guitar_bite_me_xhdpi" />
+
+    <Button
+        android:id="@+id/buttonBack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintVertical_bias="0.727"
+        tools:text="Back" />
 
     <ListView
         android:id="@+id/list_view_forecast"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="384dp"
 
-        >
-    </ListView>
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonBack"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"></ListView>
 
-</FrameLayout>
+</android.support.constraint.ConstraintLayout>
