@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="wthr_toplist_item">#EFEDEC</color>
+    <color name="wthr_clouds_color">#d0d0d1</color>
+    <color name="wthr_clear_color">#ffff00</color>
+    <color name="wthr_rain_color">#e0ecf8</color>
+    <color name="itemselected">#EDEDED</color>
+    <color name="login_hover">#E5F5FA</color>
+    <color name="sign_out_color">#E84040</color>
+</resources>

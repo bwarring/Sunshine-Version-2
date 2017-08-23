@@ -1,6 +1,7 @@
 package com.warassoc.app.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,19 +31,31 @@ public class WeatherDetailListArrayAdapter extends ArrayAdapter<WeatherDetail> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View weatherView, ViewGroup parent) {
         // Get the data item for this position
         WeatherDetail weatherDetail = getItem(position);
 
         // Check if an existing view is being reused, otherwise inflate the view
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_forecast, parent, false);
+        if (weatherView == null) {
+            weatherView = LayoutInflater.from(getContext()).inflate(R.layout.item_forecast, parent, false);
         }
+        // alternate colors in listview
+        // https://stackoverflow.com/questions/18917214/change-background-colour-of-current-listview-item-in-adapter-getview-method
+        /*
+        if (position % 2 == 0) {
+            view.setBackgroundResource(R.drawable.artists_list_backgroundcolor);
+        } else {
+            view.setBackgroundResource(R.drawable.artists_list_background_alternate);
+        }
+         */
 
         // Lookup view for data population
-        TextView tvDay = (TextView) convertView.findViewById(R.id.tvDay);
-        TextView tvWeather = (TextView) convertView.findViewById(R.id.tvWeather);
-        TextView tvTemp = (TextView) convertView.findViewById(R.id.tvTemp);
+        TextView tvDay = (TextView) weatherView.findViewById(R.id.tvDay);
+        tvDay.setTypeface(null, Typeface.BOLD);
+        TextView tvWeather = (TextView) weatherView.findViewById(R.id.tvWeather);
+        tvWeather.setTypeface(null, Typeface.BOLD);
+        TextView tvTemp = (TextView) weatherView.findViewById(R.id.tvTemp);
+        tvTemp.setTypeface(null, Typeface.BOLD);
         // Populate the data into the template view using the data object
         //for (Weather weather:weatherDetail.getWeather()){
         //    weather.getDescription();
@@ -51,11 +64,23 @@ public class WeatherDetailListArrayAdapter extends ArrayAdapter<WeatherDetail> {
         String dayStr = datetime.dayOfWeek().getAsText();
         tvDay.setText(dayStr);
         tvWeather.setText(weatherDetail.getWeather().get(0).getMain());
+        if (tvWeather.getText().length() > 0) {
+            String wthr = tvWeather.getText().toString().toLowerCase();
+            if (wthr.contains("rain")) {
+                weatherView.setBackgroundResource(R.drawable.weather_list_rain_color);
+            } else {
+                if (wthr.contains("clouds")) {
+                    weatherView.setBackgroundResource(R.drawable.weather_list_clouds_color);
+                } else {
+                    weatherView.setBackgroundResource(R.drawable.weather_list_sunny_color);
+                }
+            }
+        }
         Double tempMin = weatherDetail.getTemp().getMin();
         Double tempMax = weatherDetail.getTemp().getMax();
         String.valueOf(tempMin);
         tvTemp.setText("Low: " + String.valueOf(tempMin) + " High: " + String.valueOf(tempMax));
         // Return the completed view to render on screen
-        return convertView;
+        return weatherView;
     }
 }
