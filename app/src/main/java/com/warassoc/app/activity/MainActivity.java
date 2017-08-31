@@ -109,6 +109,11 @@ public class MainActivity extends AppCompatActivity {
         ListView lv = (ListView) findViewById(list_view_forecast);
         lv.setVisibility(ListView.VISIBLE);
 
+        ImageView listViewBanner = (ImageView) findViewById(R.id.imageView4);
+        if (listViewBanner != null) {
+            listViewBanner.setVisibility(ImageView.VISIBLE);
+        }
+
         // hide input fields
         headerImageView = (ImageView) findViewById(R.id.imageViewBanner);
         headerImageView.setVisibility(ImageView.INVISIBLE);
@@ -157,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
         EditText numberOfDaysText;
         TextView numberOfDaysTextView;
         Button buttonBack;
+        ImageView bannerImageView;
 
         public PlaceholderFragment() {
         }
@@ -180,12 +186,20 @@ public class MainActivity extends AppCompatActivity {
             buttonBack = (Button) rootView.findViewById(R.id.buttonBack);
             buttonBack.setVisibility(Button.INVISIBLE);
 
+            bannerImageView = (ImageView) rootView.findViewById(R.id.imageView4);
+            if (bannerImageView != null) {
+                bannerImageView.setVisibility(ImageView.INVISIBLE);
+            }
+
             buttonBack.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     // hide input fields
                     buttonBack = (Button) v;
                     buttonBack.setVisibility(Button.INVISIBLE);
+                    if (bannerImageView != null) {
+                        bannerImageView.setVisibility(ImageView.INVISIBLE);
+                    }
 
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);

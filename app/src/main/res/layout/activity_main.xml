@@ -4,6 +4,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gold_orange"
     tools:context="com.warassoc.app.activity.MainActivity"
     tools:ignore="MergeRootFrame"
     tools:layout_editor_absoluteY="81dp"
@@ -12,16 +13,16 @@
     <ImageView
         android:id="@+id/imageViewBanner"
         android:layout_width="0dp"
-        android:layout_height="150dp"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/guitar_bite_me"
+        android:layout_height="68dp"
         android:layout_marginLeft="0dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="0dp"
         android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/guitar_bite_me_banner" />
 
     <TextView
         android:id="@+id/zipCodeLabel"
@@ -38,11 +39,12 @@
         android:layout_height="38dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="0dp"
         android:ems="10"
         android:inputType="number"
         android:text="66061"
-        android:textSize="10sp"
+        android:textSize="12sp"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintLeft_toRightOf="@+id/zipCodeLabel"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewBanner" />
@@ -68,7 +70,7 @@
         android:inputType="number"
         android:text="7"
         android:textAlignment="center"
-        android:textSize="10sp"
+        android:textSize="12sp"
         app:layout_constraintLeft_toLeftOf="@+id/zipCode"
         app:layout_constraintTop_toBottomOf="@+id/zipCode" />
 
@@ -79,14 +81,14 @@
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:onClick="buttonOnClick"
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/numberOfDays"
-        app:layout_constraintVertical_bias="0.042" />
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>

@@ -4,6 +4,7 @@
     <string name="app_name">Bite Me</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="back">Back</string>
 
     <!-- color strings -->
     <color name="gold_orange">#ffbf00</color>
