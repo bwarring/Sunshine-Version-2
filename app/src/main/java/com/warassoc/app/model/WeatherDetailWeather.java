@@ -3,6 +3,7 @@ package com.warassoc.app.model;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -14,67 +15,59 @@ import java.util.Map;
  * Copyright 2017 Warring Associates LLC
  * PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  * <p>
- * Created by bwarr on 8/9/2017.
+ * Created by bwarr on 11/6/2018.
  */
-
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder({
         "id",
-        "name",
-        "coord",
-        "country"
+        "main",
+        "description",
+        "icon"
 })
-public class City {
+public class WeatherDetailWeather {
+
     @JsonProperty("id")
     private Integer id;
-    @JsonProperty("name")
-    private String name;
-    @JsonProperty("coord")
-    private Coord coord;
-    @JsonProperty("country")
-    private String country;
-
+    @JsonProperty("main")
+    private String main;
+    @JsonProperty("description")
+    private String description;
+    @JsonProperty("icon")
+    private String icon;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("id")
     public Integer getId() {
         return id;
     }
 
-    @JsonProperty("id")
     public void setId(Integer id) {
         this.id = id;
     }
 
-    @JsonProperty("name")
-    public String getName() {
-        return name;
+    public String getMain() {
+        return main;
     }
 
-    @JsonProperty("name")
-    public void setName(String name) {
-        this.name = name;
+    public void setMain(String main) {
+        this.main = main;
     }
 
-    @JsonProperty("coord")
-    public Coord getCoord() {
-        return coord;
+    public String getDescription() {
+        return description;
     }
 
-    @JsonProperty("coord")
-    public void setCoord(Coord coord) {
-        this.coord = coord;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    @JsonProperty("country")
-    public String getCountry() {
-        return country;
+    public String getIcon() {
+        return icon;
     }
 
-    @JsonProperty("country")
-    public void setCountry(String country) {
-        this.country = country;
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     @JsonAnyGetter
@@ -85,5 +78,16 @@ public class City {
     @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
+    }
+
+    @Override
+    public String toString() {
+        return "WeatherDetailWeather{" +
+                "id=" + id +
+                ", main='" + main + '\'' +
+                ", description='" + description + '\'' +
+                ", icon='" + icon + '\'' +
+                ", additionalProperties=" + additionalProperties +
+                '}';
     }
 }

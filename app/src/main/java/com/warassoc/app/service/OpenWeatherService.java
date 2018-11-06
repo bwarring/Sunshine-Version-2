@@ -6,7 +6,6 @@ package com.warassoc.app.service;
  * <p>
  * Created by bwarr on 8/7/2017.
  */
-
 public interface OpenWeatherService {
 
     String retrieve(OpenWeatherServiceRequest request);

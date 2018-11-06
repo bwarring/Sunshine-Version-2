@@ -63,7 +63,8 @@ public class WeatherDetailListArrayAdapter extends ArrayAdapter<WeatherDetail> {
         DateTime datetime = DateUtility.convertLongMillisecondsDateToTimezoneDate(weatherDetail.getDt());
         String dayStr = datetime.dayOfWeek().getAsText();
         tvDay.setText(dayStr);
-        tvWeather.setText(weatherDetail.getWeather().get(0).getMain());
+        //tvWeather.setText(weatherDetail.getDetailWeatherList().get(0).getMain());
+        tvWeather.setText(weatherDetail.getDetailWeatherList().get(0).getDescription());
         if (tvWeather.getText().length() > 0) {
             String wthr = tvWeather.getText().toString().toLowerCase();
             if (wthr.contains("rain")) {
@@ -76,8 +77,8 @@ public class WeatherDetailListArrayAdapter extends ArrayAdapter<WeatherDetail> {
                 }
             }
         }
-        Double tempMin = weatherDetail.getTemp().getMin();
-        Double tempMax = weatherDetail.getTemp().getMax();
+        Double tempMin = weatherDetail.getDetailMain().getMin();
+        Double tempMax = weatherDetail.getDetailMain().getMax();
         String.valueOf(tempMin);
         tvTemp.setText("Low: " + String.valueOf(tempMin) + " High: " + String.valueOf(tempMax));
         // Return the completed view to render on screen

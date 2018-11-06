@@ -32,11 +32,12 @@ public class OpenWeatherServiceImpl extends AsyncTask<Void, Void, String> implem
     private Context context;
     private View rootView;
 
+    @Inject
     public OpenWeatherServiceImpl() {
         super();
     }
 
-    @Inject
+    //@Inject
     public OpenWeatherServiceImpl(Context context, View rootView, OpenWeatherServiceRequest request) {
         super();
         this.request = request;
@@ -62,8 +63,11 @@ public class OpenWeatherServiceImpl extends AsyncTask<Void, Void, String> implem
             //APPID ="2be6bb1f8190f9079a8d5270be7417c0";
             // units: imperial <-- fahrenheit
             // units: metric <-- celsius
+
+            // 2018-1106 API Change
             StringBuilder sb = new StringBuilder();
-            sb.append("http://api.openweathermap.org/data/2.5/forecast/daily?q=");
+            //sb.append("http://api.openweathermap.org/data/2.5/forecast/daily?q=");
+            sb.append("http://api.openweathermap.org/data/2.5/forecast?zip=");
             sb.append(request.getLocationZip());
             sb.append("&mode=json&units=imperial&cnt=");
             sb.append(request.getCount());
@@ -151,5 +155,30 @@ public class OpenWeatherServiceImpl extends AsyncTask<Void, Void, String> implem
 
     public void setForecastJsonStr(String forecastJsonStr) {
         this.forecastJsonStr = forecastJsonStr;
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+
+    public View getRootView() {
+        return rootView;
+    }
+
+    public void setRootView(View rootView) {
+        this.rootView = rootView;
+    }
+
+    public OpenWeatherServiceRequest getRequest() {
+        return request;
+    }
+
+    public void setRequest(OpenWeatherServiceRequest request) {
+        this.request = request;
     }
 }

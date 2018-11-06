@@ -3,11 +3,13 @@ package com.warassoc.app.model;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,6 +20,7 @@ import java.util.Map;
  */
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder({
         "dt",
         "temp",
@@ -32,14 +35,32 @@ import java.util.Map;
 public class WeatherDetail {
     @JsonProperty("dt")
     private Integer dt;
+    @JsonProperty("dt_txt")
+    private String dateText;
+
+    // ****
+    @JsonProperty("main")
+    private WeatherDetailMain detailMain;
+    @JsonProperty("weather")
+    private java.util.List<WeatherDetailWeather> detailWeatherList;
+    @JsonProperty("clouds")
+    private WeatherDetailClouds clouds;
+    @JsonProperty("wind")
+    private WeatherDetailWind wind;
+    @JsonProperty("rain")
+    private WeatherDetailRain rain;
+    @JsonProperty("snow")
+    private WeatherDetailSnow snow;
+
+    /*
     @JsonProperty("temp")
     private Temp temp;
     @JsonProperty("pressure")
     private Double pressure;
     @JsonProperty("humidity")
     private Integer humidity;
-    @JsonProperty("weather")
-    private java.util.List<Weather> weather = null;
+    @JsonProperty("list")
+    private java.util.List<Weather> weatherList = null;
     @JsonProperty("speed")
     private Double speed;
     @JsonProperty("deg")
@@ -48,97 +69,74 @@ public class WeatherDetail {
     private Integer clouds;
     @JsonProperty("rain")
     private Double rain;
+    */
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private Map<String, Object> additionalProperties = new HashMap<>();
 
-    @JsonProperty("dt")
+    //@JsonProperty("dt")
     public Integer getDt() {
         return dt;
     }
 
-    @JsonProperty("dt")
+    //@JsonProperty("dt")
     public void setDt(Integer dt) {
         this.dt = dt;
     }
 
-    @JsonProperty("temp")
-    public Temp getTemp() {
-        return temp;
+    public String getDateText() {
+        return dateText;
     }
 
-    @JsonProperty("temp")
-    public void setTemp(Temp temp) {
-        this.temp = temp;
+    public void setDateText(String dateText) {
+        this.dateText = dateText;
     }
 
-    @JsonProperty("pressure")
-    public Double getPressure() {
-        return pressure;
+    public WeatherDetailMain getDetailMain() {
+        return detailMain;
     }
 
-    @JsonProperty("pressure")
-    public void setPressure(Double pressure) {
-        this.pressure = pressure;
+    public void setDetailMain(WeatherDetailMain detailMain) {
+        this.detailMain = detailMain;
     }
 
-    @JsonProperty("humidity")
-    public Integer getHumidity() {
-        return humidity;
+    public List<WeatherDetailWeather> getDetailWeatherList() {
+        return detailWeatherList;
     }
 
-    @JsonProperty("humidity")
-    public void setHumidity(Integer humidity) {
-        this.humidity = humidity;
+    public void setDetailWeatherList(List<WeatherDetailWeather> detailWeatherList) {
+        this.detailWeatherList = detailWeatherList;
     }
 
-    @JsonProperty("weather")
-    public java.util.List<Weather> getWeather() {
-        return weather;
-    }
-
-    @JsonProperty("weather")
-    public void setWeather(java.util.List<Weather> weather) {
-        this.weather = weather;
-    }
-
-    @JsonProperty("speed")
-    public Double getSpeed() {
-        return speed;
-    }
-
-    @JsonProperty("speed")
-    public void setSpeed(Double speed) {
-        this.speed = speed;
-    }
-
-    @JsonProperty("deg")
-    public Integer getDeg() {
-        return deg;
-    }
-
-    @JsonProperty("deg")
-    public void setDeg(Integer deg) {
-        this.deg = deg;
-    }
-
-    @JsonProperty("clouds")
-    public Integer getClouds() {
+    public WeatherDetailClouds getClouds() {
         return clouds;
     }
 
-    @JsonProperty("clouds")
-    public void setClouds(Integer clouds) {
+    public void setClouds(WeatherDetailClouds clouds) {
         this.clouds = clouds;
     }
 
-    @JsonProperty("rain")
-    public Double getRain() {
+    public WeatherDetailWind getWind() {
+        return wind;
+    }
+
+    public void setWind(WeatherDetailWind wind) {
+        this.wind = wind;
+    }
+
+    public WeatherDetailRain getRain() {
         return rain;
     }
 
-    @JsonProperty("rain")
-    public void setRain(Double rain) {
+    public void setRain(WeatherDetailRain rain) {
         this.rain = rain;
+    }
+
+    public WeatherDetailSnow getSnow() {
+        return snow;
+    }
+
+    public void setSnow(WeatherDetailSnow snow) {
+        this.snow = snow;
     }
 
     @JsonAnyGetter
@@ -149,5 +147,20 @@ public class WeatherDetail {
     @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
+    }
+
+    @Override
+    public String toString() {
+        return "WeatherDetail{" +
+                "dt=" + dt +
+                ", dateText='" + dateText + '\'' +
+                ", detailMain=" + detailMain +
+                ", detailWeatherList=" + detailWeatherList +
+                ", clouds=" + clouds +
+                ", wind=" + wind +
+                ", rain=" + rain +
+                ", snow=" + snow +
+                ", additionalProperties=" + additionalProperties +
+                '}';
     }
 }

@@ -1,5 +1,7 @@
 package com.warassoc.app.activity;
 
+//import android.app.Fragment;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +31,13 @@ import static com.example.android.sunshine.activity.R.id.numberOfDaysLabel;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    //@Inject
+    OpenWeatherServiceImpl openWeatherService;
+    //@Inject
+    //public MainActivity(OpenWeatherServiceImpl openWeatherService){
+    //    this.openWeatherService=openWeatherService;
+    //};
 
     PlaceholderFragment placeholderFragment;
     EditText zipCodeText;
@@ -137,7 +146,18 @@ public class MainActivity extends AppCompatActivity {
         request.setMode("json");
         request.setUnits("metric");
         request.setCount(count);
-        OpenWeatherServiceImpl openWeatherService = new OpenWeatherServiceImpl(b.getContext(), b.getRootView(), request);
+        // @Inject quit working - see Dagger v2.0
+        // https://dzone.com/articles/dagger-2-tutorial-dependency-injection-made-easy <=== ****
+        // https://proandroiddev.com/how-to-dagger-2-with-android-part-1-18b5b941453f
+        // https://www.techyourchance.com/dagger-2-scopes-demystified/
+        // https://code.tutsplus.com/tutorials/dependency-injection-with-dagger-2-on-android--cms-23345
+        if (openWeatherService == null) {
+            openWeatherService = new OpenWeatherServiceImpl();
+        }
+        openWeatherService.setContext(b.getContext());
+        openWeatherService.setRootView(b.getRootView());
+        openWeatherService.setRequest(request);
+        //OpenWeatherServiceImpl openWeatherService = new OpenWeatherServiceImpl(b.getContext(), b.getRootView(), request);
         openWeatherService.execute();
     }
 
